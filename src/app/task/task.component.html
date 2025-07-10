@@ -5,9 +5,9 @@
   </header>
 
   <ul>
-    @for (task of tasks; track task.id) {
+    @for (task of selectedUserTasks; track task.id) {
     <li>
-      <app-in-task />
+      <app-in-task [task]="task" />
     </li>
     }
   </ul>
