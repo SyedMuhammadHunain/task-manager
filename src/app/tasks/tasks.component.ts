@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { InTaskComponent } from './in-task/in-task.component';
+import { TaskComponent } from './task/task.component';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [InTaskComponent],
-  templateUrl: './task.component.html',
-  styleUrl: './task.component.css'
+  imports: [TaskComponent],
+  templateUrl: './tasks.component.html',
+  styleUrl: './tasks.component.css',
 })
-export class TaskComponent {
+export class TasksComponent {
   @Input() userId!: string;
   @Input() name!: string;
   tasks = [
@@ -21,7 +21,7 @@ export class TaskComponent {
       dueDate: '2025-12-31',
     },
     {
-      id: 't2', 
+      id: 't2',
       userId: 'u3',
       title: 'Build first prototype',
       summary: 'Build a first prototype of the online shop website',
@@ -38,6 +38,10 @@ export class TaskComponent {
   ];
 
   get selectedUserTasks() {
-    return this.tasks.filter(task => task.userId === this.userId);
+    return this.tasks.filter((task) => task.userId === this.userId);
+  }
+
+  onCompleteTask(id: string) {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
   }
 }
