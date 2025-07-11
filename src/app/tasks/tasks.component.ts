@@ -1,14 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TaskComponent } from './task/task.component';
+import { NewTaskComponent } from './new-task/new-task.component';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, NewTaskComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
+  isAddTask: boolean = false;
   @Input() userId!: string;
   @Input() name!: string;
   tasks = [
@@ -43,5 +45,12 @@ export class TasksComponent {
 
   onCompleteTask(id: string) {
     this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+  onAddTask() {
+    this.isAddTask = true;
+  }
+
+  onCloseAddTask(isAddTaskClose: boolean) {
+    this.isAddTask = !isAddTaskClose;
   }
 }
