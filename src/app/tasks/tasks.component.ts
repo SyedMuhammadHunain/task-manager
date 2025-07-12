@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
+import { NewTask } from './new-task/new-task.model';
 
 @Component({
   selector: 'app-task',
@@ -52,5 +53,16 @@ export class TasksComponent {
 
   onCloseAddTask(isAddTaskClose: boolean) {
     this.isAddTask = !isAddTaskClose;
+  }
+
+  onAddNewTask(newTask: NewTask) {
+    this.tasks.unshift({
+      id: new Date().getTime().toString(),
+      userId: this.userId,
+      title: newTask.title,
+      summary: newTask.summary,
+      dueDate:  newTask.dueDate,
+    });
+    this.isAddTask = false;
   }
 }
